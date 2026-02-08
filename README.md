@@ -29,7 +29,7 @@
 ./gradlew test
 ```
 
-- 동시성 테스트 4개 + 비즈니스 규칙 테스트 9개 = 총 13개
+- 동시성 테스트 4개 + 비즈니스 규칙 테스트 10개 = 총 14개
 
 ## API 서버 접속 정보
 
@@ -80,7 +80,7 @@
 │   ├── REQUIREMENTS.md        요구사항 분석 및 설계 결정
 │   └── API.md                 API 명세서
 ├── prompts/                   AI 프롬프트 이력
-│   └── 001-project-setup.md
+│   └── prompt-history.md
 └── src/
     ├── main/java/.../
     │   ├── config/            DataInitializer, H2ConsoleConfig
