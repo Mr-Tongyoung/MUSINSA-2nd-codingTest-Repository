@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,11 +32,13 @@ public class EnrollmentController {
             @ApiResponse(responseCode = "201", description = "수강신청 성공"),
             @ApiResponse(responseCode = "404", description = "학생 또는 강좌를 찾을 수 없음",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+            @ApiResponse(responseCode = "400", description = "요청 데이터 누락 (studentId, courseId 필수)",
+                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
             @ApiResponse(responseCode = "409", description = "정원 초과 / 학점 초과 / 시간 충돌 / 중복 신청",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
     @PostMapping("/enrollments")
-    public ResponseEntity<EnrollmentResponse> enroll(@RequestBody EnrollmentRequest request) {
+    public ResponseEntity<EnrollmentResponse> enroll(@Valid @RequestBody EnrollmentRequest request) {
         EnrollmentResponse response = enrollmentService.enroll(
                 request.getStudentId(), request.getCourseId());
         return ResponseEntity.status(HttpStatus.CREATED).body(response);

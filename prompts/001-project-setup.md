@@ -53,6 +53,30 @@
 
 ### 수행 결과
 - 7개 작업 단위 생성 (의존관계 포함)
+  #1 H2 DB 설정 및 JPA 엔티티 구현
+  ├──→ #2 Repository 계층 구현
+  │     ├──→ #3 초기 데이터 생성기 구현
+  │     ├──→ #4 헬스체크 및 조회 API 구현
+  │     └──→ #5 수강신청/취소 API 및 동시성 제어 ← (#3 완료 후)
+  │           └──→ #6 동시성 통합 테스트 작성
+  │                 └──→ #7 문서 최종 업데이트 및 마무리
+  ┌─────┬──────────────────┬────────────────────────────────────────────────────┐
+  │  #  │       작업       │                     핵심 내용                      │
+  ├─────┼──────────────────┼────────────────────────────────────────────────────┤
+  │ 1   │ DB 설정 + 엔티티 │ Department, Professor, Course, Student, Enrollment │
+  ├─────┼──────────────────┼────────────────────────────────────────────────────┤
+  │ 2   │ Repository       │ JpaRepository + 비관적 락 쿼리                     │
+  ├─────┼──────────────────┼────────────────────────────────────────────────────┤
+  │ 3   │ 데이터 생성기    │ 학과 10, 교수 100, 강좌 500, 학생 10,000 동적 생성 │
+  ├─────┼──────────────────┼────────────────────────────────────────────────────┤
+  │ 4   │ 조회 API         │ /health, /students, /courses, /professors          │
+  ├─────┼──────────────────┼────────────────────────────────────────────────────┤
+  │ 5   │ 수강신청/취소    │ 동시성 제어 (비관적 락) - 핵심                     │
+  ├─────┼──────────────────┼────────────────────────────────────────────────────┤
+  │ 6   │ 테스트           │ 100명 동시 신청 → 1명만 성공 검증                  │
+  ├─────┼──────────────────┼────────────────────────────────────────────────────┤
+  │ 7   │ 문서 마무리      │ API/REQUIREMENTS 최종 업데이트                     │
+  └─────┴──────────────────┴────────────────────────────────────────────────────┘
 
 ---
 
@@ -160,3 +184,37 @@
 - SwaggerConfig.java: OpenAPI 메타정보 설정
 - 컨트롤러 5개에 @Tag, @Operation, @ApiResponse, @Parameter 어노테이션 추가
 - Swagger UI: http://localhost:8080/swagger-ui/index.html 정상 동작 확인
+
+---
+
+## 프롬프트 15
+
+> 커밋하고 푸시해줘
+
+### 수행 결과 (2026-02-08 16:32)
+- 커밋: `Feat: Swagger(OpenAPI) 문서 적용`
+- origin/main 푸시 완료
+
+---
+
+## 프롬프트 16
+
+> 각 API의 엣지 케이스를 찾는다.
+> 예시: 현재 학생조회 API는 학생이 존재하지 않을 경우는 엣지 케이스이다. 이와같은 엣지 케이스를 찾고 예외처리 후 관련 문서 업데이트 진행.
+
+### 수행 결과 (2026-02-08 16:35)
+발견 및 처리한 엣지 케이스:
+1. POST /enrollments - studentId/courseId null → @Valid + @NotNull 검증 (400 INVALID_REQUEST)
+2. POST /enrollments - 잘못된 JSON body → HttpMessageNotReadableException 처리 (400 INVALID_REQUEST_BODY)
+3. DELETE /enrollments/abc - PathVariable 타입 불일치 → MethodArgumentTypeMismatchException 처리 (400 INVALID_PARAMETER)
+4. GET /students/abc/timetable - PathVariable 타입 불일치 → 동일 처리
+5. GET /courses?departmentId=99999 - 존재하지 않는 학과 → DEPARTMENT_NOT_FOUND (404)
+6. GET /nonexistent - 없는 경로 → NoResourceFoundException 처리 (404 RESOURCE_NOT_FOUND)
+
+변경 파일:
+- build.gradle: spring-boot-starter-validation 의존성 추가
+- EnrollmentRequest: @NotNull 검증 추가
+- EnrollmentController: @Valid 추가
+- CourseService: 학과 존재 여부 검증 추가
+- GlobalExceptionHandler: 4개 예외 핸들러 추가
+- docs/API.md: 공통 에러 코드 및 각 엔드포인트 에러 케이스 업데이트

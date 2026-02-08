@@ -1,5 +1,7 @@
 # API 명세서
 
+> Swagger UI: http://localhost:8080/swagger-ui/index.html
+
 ## Base URL
 
 ```
@@ -21,10 +23,19 @@ http://localhost:8080
 |------|------|
 | 200 | 성공 |
 | 201 | 생성 성공 |
-| 400 | 잘못된 요청 |
+| 400 | 잘못된 요청 (필수 파라미터 누락, 타입 불일치, 잘못된 JSON) |
 | 404 | 리소스 없음 |
 | 409 | 충돌 (정원 초과, 시간 충돌 등) |
 | 500 | 서버 내부 오류 |
+
+## 공통 에러 코드
+
+| 에러 코드 | 상태 | 설명 |
+|-----------|------|------|
+| INVALID_REQUEST | 400 | 요청 데이터 유효성 검증 실패 (필수 필드 누락 등) |
+| INVALID_PARAMETER | 400 | PathVariable/QueryParam 타입 불일치 (e.g., 숫자 자리에 문자열) |
+| INVALID_REQUEST_BODY | 400 | 요청 본문 파싱 실패 (잘못된 JSON 등) |
+| RESOURCE_NOT_FOUND | 404 | 존재하지 않는 경로 요청 |
 
 ---
 
@@ -61,7 +72,7 @@ GET /students
 
 ---
 
-### 3. 강좌 목록 조회 (전체)
+### 3. 강좌 목록 조회
 
 ```
 GET /courses
@@ -87,6 +98,12 @@ GET /courses
   }
 ]
 ```
+
+**에러 케이스**:
+
+| 상황 | 코드 | 에러 코드 | 메시지 |
+|------|------|-----------|--------|
+| 존재하지 않는 학과 ID | 404 | DEPARTMENT_NOT_FOUND | 해당 학과를 찾을 수 없습니다 |
 
 ---
 
@@ -123,6 +140,8 @@ POST /enrollments
 }
 ```
 
+> `studentId`와 `courseId`는 필수입니다. 누락 시 400 에러가 반환됩니다.
+
 **성공 응답** `201 Created`:
 ```json
 {
@@ -139,12 +158,14 @@ POST /enrollments
 
 | 상황 | 코드 | 에러 코드 | 메시지 |
 |------|------|-----------|--------|
+| 필수 필드 누락 | 400 | INVALID_REQUEST | studentId: 학생 ID는 필수입니다 |
+| 잘못된 요청 본문 | 400 | INVALID_REQUEST_BODY | 요청 본문을 읽을 수 없습니다 |
+| 학생 없음 | 404 | STUDENT_NOT_FOUND | 해당 학생을 찾을 수 없습니다 |
+| 강좌 없음 | 404 | COURSE_NOT_FOUND | 해당 강좌를 찾을 수 없습니다 |
 | 정원 초과 | 409 | CAPACITY_EXCEEDED | 해당 강좌의 정원이 초과되었습니다 |
 | 학점 초과 | 409 | CREDIT_LIMIT_EXCEEDED | 최대 수강 학점(18학점)을 초과합니다 |
 | 시간 충돌 | 409 | SCHEDULE_CONFLICT | 기존 수강 강좌와 시간이 충돌합니다 |
 | 중복 신청 | 409 | ALREADY_ENROLLED | 이미 수강신청한 강좌입니다 |
-| 학생 없음 | 404 | STUDENT_NOT_FOUND | 해당 학생을 찾을 수 없습니다 |
-| 강좌 없음 | 404 | COURSE_NOT_FOUND | 해당 강좌를 찾을 수 없습니다 |
 
 ---
 
@@ -165,6 +186,7 @@ DELETE /enrollments/{enrollmentId}
 
 | 상황 | 코드 | 에러 코드 | 메시지 |
 |------|------|-----------|--------|
+| 파라미터 타입 불일치 | 400 | INVALID_PARAMETER | 'enrollmentId' 파라미터의 값이 올바르지 않습니다 |
 | 수강 기록 없음 | 404 | ENROLLMENT_NOT_FOUND | 해당 수강 기록을 찾을 수 없습니다 |
 
 ---
@@ -199,4 +221,5 @@ GET /students/{studentId}/timetable
 
 | 상황 | 코드 | 에러 코드 | 메시지 |
 |------|------|-----------|--------|
+| 파라미터 타입 불일치 | 400 | INVALID_PARAMETER | 'studentId' 파라미터의 값이 올바르지 않습니다 |
 | 학생 없음 | 404 | STUDENT_NOT_FOUND | 해당 학생을 찾을 수 없습니다 |
