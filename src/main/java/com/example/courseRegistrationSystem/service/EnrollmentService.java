@@ -37,10 +37,16 @@ public class EnrollmentService {
                 .orElseThrow(() -> new BusinessException(
                         HttpStatus.NOT_FOUND, "COURSE_NOT_FOUND", "해당 강좌를 찾을 수 없습니다"));
 
-        // 1. 중복 신청 검증
+        // 1. 동일 강좌 중복 신청 검증
         if (enrollmentRepository.existsByStudentIdAndCourseId(studentId, courseId)) {
             throw new BusinessException(
                     HttpStatus.CONFLICT, "ALREADY_ENROLLED", "이미 수강신청한 강좌입니다");
+        }
+
+        // 2. 같은 과목 타 분반 중복 검증
+        if (enrollmentRepository.existsByStudentIdAndCourseBaseName(studentId, course.getBaseName())) {
+            throw new BusinessException(
+                    HttpStatus.CONFLICT, "SAME_COURSE_ENROLLED", "같은 과목의 다른 분반을 이미 수강신청하였습니다");
         }
 
         // 2. 정원 초과 검증

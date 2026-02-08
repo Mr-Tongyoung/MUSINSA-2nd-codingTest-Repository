@@ -144,6 +144,7 @@ public class DataInitializer implements ApplicationRunner {
 
                     courses.add(Course.builder()
                             .name(fullName)
+                            .baseName(courseName)
                             .credits(credits)
                             .capacity(capacity)
                             .schedule(schedule)

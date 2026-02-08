@@ -19,6 +19,9 @@ public class Course {
     private String name;
 
     @Column(nullable = false)
+    private String baseName;
+
+    @Column(nullable = false)
     private int credits;
 
     @Column(nullable = false)
@@ -39,9 +42,10 @@ public class Course {
     private Department department;
 
     @Builder
-    public Course(String name, int credits, int capacity, String schedule,
+    public Course(String name, String baseName, int credits, int capacity, String schedule,
                   Professor professor, Department department) {
         this.name = name;
+        this.baseName = baseName != null ? baseName : name;
         this.credits = credits;
         this.capacity = capacity;
         this.enrolled = 0;

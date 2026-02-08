@@ -147,6 +147,19 @@ class EnrollmentServiceTest {
     }
 
     @Test
+    @DisplayName("같은 과목의 다른 분반을 수강신청하면 SAME_COURSE_ENROLLED")
+    void enroll_sameCourseEnrolled() {
+        Course section1 = saveCourseWithBaseName("자료구조 1분반", "자료구조", 3, 30, "월 09:00-10:30");
+        Course section2 = saveCourseWithBaseName("자료구조 2분반", "자료구조", 3, 30, "화 09:00-10:30");
+
+        enrollmentService.enroll(student.getId(), section1.getId());
+
+        assertThatThrownBy(() -> enrollmentService.enroll(student.getId(), section2.getId()))
+                .isInstanceOf(BusinessException.class)
+                .satisfies(e -> assertThat(((BusinessException) e).getCode()).isEqualTo("SAME_COURSE_ENROLLED"));
+    }
+
+    @Test
     @DisplayName("시간표 조회 시 수강 중인 강좌와 총 학점을 반환한다")
     void getTimetable_success() {
         saveCourseAndEnroll("자료구조", 3, "월 09:00-10:30");
@@ -162,6 +175,18 @@ class EnrollmentServiceTest {
     private Course saveCourse(String name, int credits, int capacity, String schedule) {
         return courseRepository.save(Course.builder()
                 .name(name)
+                .credits(credits)
+                .capacity(capacity)
+                .schedule(schedule)
+                .professor(professor)
+                .department(department)
+                .build());
+    }
+
+    private Course saveCourseWithBaseName(String name, String baseName, int credits, int capacity, String schedule) {
+        return courseRepository.save(Course.builder()
+                .name(name)
+                .baseName(baseName)
                 .credits(credits)
                 .capacity(capacity)
                 .schedule(schedule)

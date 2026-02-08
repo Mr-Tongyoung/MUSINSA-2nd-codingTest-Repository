@@ -218,3 +218,28 @@
 - CourseService: 학과 존재 여부 검증 추가
 - GlobalExceptionHandler: 4개 예외 핸들러 추가
 - docs/API.md: 공통 에러 코드 및 각 엔드포인트 에러 케이스 업데이트
+
+---
+
+## 프롬프트 17
+
+> 커밋하고 푸시해줘
+
+### 수행 결과 (2026-02-08 16:38)
+- 커밋: `Feat: 엣지 케이스 예외 처리 및 입력 검증 추가`
+- origin/main 푸시 완료
+
+---
+
+## 프롬프트 18
+
+> 같은 과목은 분반이 다르더라도 수강신청할 수 없게 처리
+
+### 수행 결과 (2026-02-08 16:55)
+- Course 엔티티에 baseName 필드 추가 (분반 구분 없는 원래 과목명)
+- DataInitializer: 분반 생성 시 baseName 설정
+- EnrollmentRepository: existsByStudentIdAndCourseBaseName 쿼리 추가
+- EnrollmentService: 같은 과목 타 분반 중복 검증 (SAME_COURSE_ENROLLED)
+- EnrollmentServiceTest: 같은 과목 다른 분반 수강신청 테스트 추가
+- docs/API.md: SAME_COURSE_ENROLLED 에러 코드 추가
+- 전체 테스트 통과 (14개)

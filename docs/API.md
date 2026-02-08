@@ -166,6 +166,7 @@ POST /enrollments
 | 학점 초과 | 409 | CREDIT_LIMIT_EXCEEDED | 최대 수강 학점(18학점)을 초과합니다 |
 | 시간 충돌 | 409 | SCHEDULE_CONFLICT | 기존 수강 강좌와 시간이 충돌합니다 |
 | 중복 신청 | 409 | ALREADY_ENROLLED | 이미 수강신청한 강좌입니다 |
+| 같은 과목 타 분반 중복 | 409 | SAME_COURSE_ENROLLED | 같은 과목의 다른 분반을 이미 수강신청하였습니다 |
 
 ---
 
