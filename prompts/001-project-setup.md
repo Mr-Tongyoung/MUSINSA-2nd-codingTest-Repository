@@ -1,0 +1,36 @@
+# 프롬프트 #001 - 프로젝트 초기 설정
+
+- **입력 시간**: 2026-02-08
+- **도구**: Claude Code (Claude Opus 4.6)
+
+---
+
+## 프롬프트 1
+
+> 대학교 수강신청 프로그램을 만들기 위한 프로젝트를 진행하자. 첫번째 커밋 메세지 작성해줘.
+
+### 수행 결과
+- Spring Boot 프로젝트 초기 커밋 생성
+- `.DS_Store`를 스테이징에서 제거
+- 커밋 메시지: `Init: Spring Boot 프로젝트 초기 설정`
+
+---
+
+## 프롬프트 2
+
+> https://github.com/Mr-Tongyoung/MUSINSA-2nd-codingTest-Repository.git 원격 깃 저장소의 링크이다. 메인 브랜치에 푸쉬 해줘
+
+### 수행 결과
+- origin 원격 저장소에 main 브랜치 푸시 완료
+
+---
+
+## 프롬프트 3
+
+> PROBLEM.md를 분석해서 프로젝트를 시작하자.
+> 1. 제출물 구조를 확인한뒤에 필수적인 제출 파일들을 생성
+> 2. 지금부터 입력하는 모든 프롬프트는 prompts/*.md 파일에 입력시간과 함께 저장
+
+### 수행 결과
+- 필수 제출 파일 생성: README.md, CLAUDE.md, docs/REQUIREMENTS.md, docs/API.md
+- 프롬프트 이력 기록 시작
