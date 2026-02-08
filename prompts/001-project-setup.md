@@ -69,3 +69,40 @@
 - 수강신청/취소 API: POST /enrollments, DELETE /enrollments/{id}, GET /students/{id}/timetable
 - 동시성 제어: 비관적 락 (PESSIMISTIC_WRITE)
 - 서버 기동 5초, 전체 API 정상 동작 확인
+
+---
+
+## 프롬프트 7
+
+> 인메모리 디비가 정상 작동하는지 웹브라우저에서 콘솔로 확인했는데 Whitelabel Error Page 가 나오는 중임. 문제 원인 분석
+
+### 수행 결과 (2026-02-08 15:45)
+- 원인: Spring Boot 4.x에서 H2ConsoleAutoConfiguration 미작동
+- 해결: JakartaWebServlet 수동 서블릿 등록 (H2ConsoleConfig.java)
+- H2 의존성 runtimeOnly → implementation 변경
+
+---
+
+## 프롬프트 8
+
+> 작업내용 성격에 따라 분류하여 커밋하고 푸시해줘
+
+### 수행 결과 (2026-02-08 15:50)
+- 3개 커밋으로 분류: Feat(엔티티), Feat(API+동시성), Fix(H2콘솔)
+- origin/main 푸시 완료
+
+---
+
+## 프롬프트 9
+
+> 다음 작업 진행하자. 동시성 통합 테스트 작성해줘
+
+### 수행 결과 (2026-02-08 16:04)
+- EnrollmentConcurrencyTest: 동시성 테스트 4개
+  - 정원 1명 강좌 100명 동시 신청 → 1명만 성공
+  - 정원 30명 강좌 100명 동시 신청 → 30명만 성공
+  - 동일 학생 동시 중복 신청 → 1번만 성공
+  - 수강신청/취소 동시 발생 → enrolled 카운트 정확
+- EnrollmentServiceTest: 비즈니스 규칙 테스트 9개
+  - 수강신청 성공, 정원 초과, 중복 신청, 학점 초과, 시간 충돌 등
+- 전체 13개 테스트 PASSED
