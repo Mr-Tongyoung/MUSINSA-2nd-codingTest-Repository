@@ -128,3 +128,35 @@
 - docs/API.md: Base URL 8081 반영, 학생 응답에 studentNumber 필드 추가
 - docs/REQUIREMENTS.md: 동시성 검증 결과, 시간 충돌 로직 상세화, 데이터 정합성 보장, 테스트 전략 추가
 - prompts/ 프롬프트 이력 최종 업데이트
+
+---
+
+## 프롬프트 12
+
+> 포트번호는 8080으로 설정하고, 이에 맞게 포트 넘버 관련 문서 업데이트
+
+### 수행 결과 (2026-02-08 16:20)
+- application.yaml: server.port 8081 → 8080 변경
+- README.md, docs/API.md: 포트 번호 8080으로 통일
+
+---
+
+## 프롬프트 13
+
+> 커밋하고 푸시해줘
+
+### 수행 결과 (2026-02-08 16:22)
+- 커밋: `Docs: 문서 최종 업데이트 및 포트 8080 통일`
+- origin/main 푸시 완료
+
+---
+
+## 프롬프트 14
+
+> SwaggerAPI를 사용하여 API 접근성을 높여라. Swagger 의존성을 주입하고 각각의 컨트롤러에 스웨거독스를 추가한다.
+
+### 수행 결과 (2026-02-08 16:30)
+- springdoc-openapi-starter-webmvc-ui 2.8.6 의존성 추가
+- SwaggerConfig.java: OpenAPI 메타정보 설정
+- 컨트롤러 5개에 @Tag, @Operation, @ApiResponse, @Parameter 어노테이션 추가
+- Swagger UI: http://localhost:8080/swagger-ui/index.html 정상 동작 확인
