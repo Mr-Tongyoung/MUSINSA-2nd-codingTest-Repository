@@ -1,7 +1,5 @@
 # API 명세서
 
-> 이 문서는 구현 진행에 따라 업데이트됩니다.
-
 ## Base URL
 
 ```
@@ -54,8 +52,9 @@ GET /students
   {
     "id": 1,
     "name": "김민준",
-    "departmentName": "컴퓨터공학과",
-    "grade": 3
+    "studentNumber": "202300001",
+    "grade": 3,
+    "departmentName": "컴퓨터공학과"
   }
 ]
 ```
