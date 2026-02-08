@@ -20,18 +20,6 @@ Spring Boot 4.0.2 + Java 17 + Gradle 기반으로 프로젝트를 초기 세팅�
 
 ## 프롬프트 2
 
-> https://github.com/Mr-Tongyoung/MUSINSA-2nd-codingTest-Repository.git 원격 깃 저장소의 링크이다. 메인 브랜치에 푸쉬 해줘
-
-### 답변
-origin 원격 저장소를 등록하고 main 브랜치에 푸시.
-
-### 수행 결과
-- origin/main 푸시 완료
-
----
-
-## 프롬프트 3
-
 > PROBLEM.md를 분석해서 프로젝트를 시작하자.
 > 1. 제출물 구조를 확인한뒤에 필수적인 제출 파일들을 생성
 > 2. 지금부터 입력하는 모든 프롬프트는 prompts/*.md 파일에 입력시간과 함께 저장
@@ -45,17 +33,7 @@ PROBLEM.md의 제출물 구조를 분석하여 필수 파일 4개(README.md, CLA
 
 ---
 
-## 프롬프트 4
-
-> 커밋하고 푸시해줘
-
-### 수행 결과
-- 커밋: `Docs: 필수 제출 문서 및 프로젝트 구조 설정`
-- origin/main 푸시 완료
-
----
-
-## 프롬프트 5
+## 프롬프트 3
 
 > 이제 본격적으로 핵심 기능 구현을 시작하자. 요구사항을 분석하여 앞으로의 작업단위를 만들어줘
 
@@ -76,7 +54,7 @@ PROBLEM.md의 요구사항을 분석하여 의존관계를 고려한 7개 작업
 
 ---
 
-## 프롬프트 6
+## 프롬프트 4
 
 > 응 시작하자
 
@@ -91,7 +69,7 @@ PROBLEM.md의 요구사항을 분석하여 의존관계를 고려한 7개 작업
 
 ---
 
-## 프롬프트 7
+## 프롬프트 5
 
 > 인메모리 디비가 정상 작동하는지 웹브라우저에서 콘솔로 확인했는데 Whitelabel Error Page 가 나오는 중임. 문제 원인 분석
 
@@ -105,17 +83,7 @@ Spring Boot 4.x에서 H2ConsoleAutoConfiguration이 정상 작동하지 않는 �
 
 ---
 
-## 프롬프트 8
-
-> 작업내용 성격에 따라 분류하여 커밋하고 푸시해줘
-
-### 수행 결과
-- 3개 커밋으로 분류: `Feat: 엔티티/리포지토리`, `Feat: API+동시성 제어`, `Fix: H2 콘솔`
-- origin/main 푸시 완료
-
----
-
-## 프롬프트 9
+## 프롬프트 6
 
 > 다음 작업 진행하자. 동시성 통합 테스트 작성해줘
 
@@ -129,17 +97,7 @@ Spring Boot 4.x에서 H2ConsoleAutoConfiguration이 정상 작동하지 않는 �
 
 ---
 
-## 프롬프트 10
-
-> 커밋하고 푸시해줘
-
-### 수행 결과
-- 커밋: `Test: 동시성 통합 테스트 및 비즈니스 규칙 테스트 작성`
-- origin/main 푸시 완료
-
----
-
-## 프롬프트 11
+## 프롬프트 7
 
 > 문서 최종 업데이트 및 마무리 진행
 
@@ -153,7 +111,7 @@ README.md, API.md, REQUIREMENTS.md를 실제 구현 결과에 맞게 갱신. 포
 
 ---
 
-## 프롬프트 12
+## 프롬프트 8
 
 > 포트번호는 8080으로 설정하고, 이에 맞게 포트 넘버 관련 문서 업데이트
 
@@ -166,17 +124,7 @@ application.yaml의 server.port를 8080으로 설정하고, README.md와 API.md�
 
 ---
 
-## 프롬프트 13
-
-> 커밋하고 푸시해줘
-
-### 수행 결과
-- 커밋: `Docs: 문서 최종 업데이트 및 포트 8080 통일`
-- origin/main 푸시 완료
-
----
-
-## 프롬프트 14
+## 프롬프트 9
 
 > SwaggerAPI를 사용하여 API 접근성을 높여라. Swagger 의존성을 주입하고 각각의 컨트롤러에 스웨거독스를 추가한다.
 
@@ -191,17 +139,7 @@ springdoc-openapi-starter-webmvc-ui를 도입하고, SwaggerConfig에서 OpenAPI
 
 ---
 
-## 프롬프트 15
-
-> 커밋하고 푸시해줘
-
-### 수행 결과
-- 커밋: `Feat: Swagger(OpenAPI) 문서 적용`
-- origin/main 푸시 완료
-
----
-
-## 프롬프트 16
+## 프롬프트 10
 
 > 각 API의 엣지 케이스를 찾는다.
 > 예시: 현재 학생조회 API는 학생이 존재하지 않을 경우는 엣지 케이스이다. 이와같은 엣지 케이스를 찾고 예외처리 후 관련 문서 업데이트 진행.
@@ -227,17 +165,7 @@ spring-boot-starter-validation 의존성이 누락되어 있어 함께 추가.
 
 ---
 
-## 프롬프트 17
-
-> 커밋하고 푸시해줘
-
-### 수행 결과
-- 커밋: `Fix: API 엣지 케이스 예외 처리 강화`
-- origin/main 푸시 완료
-
----
-
-## 프롬프트 18
+## 프롬프트 11
 
 > 같은 과목은 분반이 다르더라도 수강신청할 수 없게 처리
 
@@ -255,17 +183,7 @@ Course 엔티티에 `baseName` 필드를 추가하여 분반과 무관한 원래
 
 ---
 
-## 프롬프트 19
-
-> 커밋하고 푸시해줘
-
-### 수행 결과
-- 커밋: `Feat: 같은 과목 타 분반 수강신청 중복 방지`
-- origin/main 푸시 완료
-
----
-
-## 프롬프트 20
+## 프롬프트 12
 
 > PROBLEM.md를 다시 확인하고 평가 안내에 나와있는 기준을 모두 만족했는지 검사
 
@@ -274,22 +192,11 @@ PROBLEM.md의 평가 기준 3단계(동작 여부, 핵심 기능, 사고의 깊�
 
 ### 수행 결과
 - 평가 기준 전체 대조 점검 완료
-- 미반영 사항 3건 식별
+- 미반영 사항 3건 식별 후 수정
 
 ---
 
-## 프롬프트 21
-
-> 미반영 사항에 대해 업데이트
-
-### 수행 결과
-- README.md: 테스트 개수 13개 → 14개 수정
-- CLAUDE.md: 같은 과목 타 분반 중복 수강신청 불가 규칙 추가
-- docs/REQUIREMENTS.md: 암묵적 요구사항 및 테스트 전략에 SAME_COURSE_ENROLLED 반영
-
----
-
-## 프롬프트 22
+## 프롬프트 13
 
 > 암묵적 요구사항에 대해서 단순히 불필요하다. 제한이 없다. 등의 근거보다는 해당 기능을 구현하기 위해 필요한 오버헤드(DB 데이터추가 등)를 언급하고 추후 리팩토링을 하기 위한 방안에 어떤것이 있는지 정리
 
@@ -305,34 +212,7 @@ PROBLEM.md의 평가 기준 3단계(동작 여부, 핵심 기능, 사고의 깊�
 
 ---
 
-## 프롬프트 23
-
-> 프롬프트 이력 관리 파일명을 직관적으로 변환, 프롬프트 이력 업데이트, 변경사항 커밋 후 푸시
-
-### 답변
-파일명을 `001-project-setup.md` → `prompt-history.md`로 변경하여 채점자가 프롬프트 이력임을 즉시 파악할 수 있도록 개선. 누락된 프롬프트 19~23 이력 추가. 프롬프트·답변·수행 결과 3단 템플릿으로 전면 재구성.
-
-### 수행 결과
-- prompts/001-project-setup.md → prompts/prompt-history.md 파일명 변경
-- 프롬프트 19~23 이력 추가
-- 전체 프롬프트에 답변(핵심 결론) 섹션 추가
-- README.md 프로젝트 구조 반영
-
----
-
-## 프롬프트 24
-
-> prompt-history파일은 채점자가 보고 작업의 흐름을 이해할 수 있어야 함. 이를 위해 프롬프트, 답변(요약해서 핵심 결론만 제공), 수행 결과 의 템플릿으로 업데이트.
-
-### 답변
-전체 23개 프롬프트를 프롬프트→답변(핵심 결론)→수행 결과 3단 템플릿으로 전면 재작성. 단순 커밋/푸시 요청은 수행 결과만, 기능 구현/분석 요청은 답변에 핵심 판단과 기술적 결론을 포함.
-
-### 수행 결과
-- prompt-history.md 전체 재구성 (3단 템플릿 적용)
-
----
-
-## 프롬프트 25
+## 프롬프트 14
 
 > 수강신청 서비스에서의 동시성 제어전략으로 사용할 수 있는것들 나열하고 각각을 사용하는 이유와 장단점 분석
 
@@ -349,20 +229,57 @@ PROBLEM.md의 평가 기준 3단계(동작 여부, 핵심 기능, 사고의 깊�
 
 ---
 
-## 프롬프트 26
+## 프롬프트 15
 
-> 커밋하고 푸시해줘
+> README.md에 스웨거 사용방법 추가
+
+### 답변
+Swagger UI 접속 URL과 활용 방법을 README.md에 추가하여 평가자가 API를 인터랙티브하게 테스트할 수 있도록 안내.
 
 ### 수행 결과
-- 커밋: `Docs: 동시성 제어 전략 비교 분석 및 문서 보강`
-- origin/main 푸시 완료
+- README.md: Swagger UI 섹션 추가 (http://localhost:8080/swagger-ui/index.html)
 
 ---
 
-## 프롬프트 27
+## 프롬프트 16
 
-> 프롬프트 이력 업데이트하고 커밋 푸시해줘
+> 스웨거Docs를 인터페이스화하여 컨트롤러코드의 가독성을 높여라.
+
+### 답변
+`controller/docs/` 패키지에 5개 Swagger Docs 인터페이스를 생성하여 Swagger 어노테이션(@Tag, @Operation, @ApiResponses, @Parameter 등)을 분리. 컨트롤러는 인터페이스를 구현(implements)하고 Spring MVC 어노테이션과 비즈니스 로직만 보유하도록 정리.
 
 ### 수행 결과
-- 프롬프트 24~27 이력 추가
-- 커밋 및 origin/main 푸시 완료
+- `controller/docs/` 패키지에 5개 인터페이스 생성 (HealthControllerDocs, StudentControllerDocs, ProfessorControllerDocs, CourseControllerDocs, EnrollmentControllerDocs)
+- 5개 컨트롤러에서 Swagger 어노테이션 제거 후 `implements *ControllerDocs` 적용
+- 전체 14개 테스트 통과
+
+---
+
+## 프롬프트 17
+
+> 현재 예외처리 역할을 맡고 있는 클래스의 구조도 보여줘
+
+### 답변
+예외처리는 3개 클래스로 구성:
+- **BusinessException**: 비즈니스 규칙 위반 시 throw하는 커스텀 예외 (status, code, message)
+- **GlobalExceptionHandler**: `@RestControllerAdvice`로 5개 예외 타입을 가로채어 일관된 `ErrorResponse`로 변환
+  - BusinessException (9개 비즈니스 에러 코드)
+  - MethodArgumentNotValidException (400, INVALID_REQUEST)
+  - MethodArgumentTypeMismatchException (400, INVALID_PARAMETER)
+  - HttpMessageNotReadableException (400, INVALID_REQUEST_BODY)
+  - NoResourceFoundException (404, RESOURCE_NOT_FOUND)
+- **ErrorResponse**: 공통 에러 응답 DTO (`error`, `code` 필드)
+
+---
+
+## 프롬프트 18
+
+> 프롬프트 이력 파일명을 대문자로 수정하고, 불필요한 프롬프트(커밋/푸시 요청 등)를 제거하여 작업 흐름이 명확히 보이도록 정리
+
+### 답변
+`prompt-history.md` → `PROMPT-HISTORY.md`로 파일명 변경 (README.md, CLAUDE.md 등 타 문서와 대문자 컨벤션 통일). 단순 "커밋하고 푸시해줘" 프롬프트를 제거하고 의미 있는 작업 프롬프트만 남겨 번호를 재정렬.
+
+### 수행 결과
+- prompts/prompt-history.md → prompts/PROMPT-HISTORY.md 파일명 변경
+- 불필요 프롬프트 제거 및 번호 재정렬
+- README.md 프로젝트 구조 반영

@@ -91,7 +91,7 @@ http://localhost:8080/swagger-ui/index.html
 │   ├── REQUIREMENTS.md        요구사항 분석 및 설계 결정
 │   └── API.md                 API 명세서
 ├── prompts/                   AI 프롬프트 이력
-│   └── prompt-history.md
+│   └── PROMPT-HISTORY.md
 └── src/
     ├── main/java/.../
     │   ├── config/            DataInitializer, H2ConsoleConfig
