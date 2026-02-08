@@ -54,6 +54,17 @@
 | 강좌 | 547개 |
 | 학생 | 10,000명 |
 
+## Swagger UI (API 문서)
+
+서버 실행 후 브라우저에서 접속:
+
+```
+http://localhost:8080/swagger-ui/index.html
+```
+
+- 전체 API 목록 조회, 요청 파라미터 확인, 직접 API 호출 테스트 가능
+- springdoc-openapi 기반으로 컨트롤러에서 자동 생성
+
 ## API 엔드포인트 요약
 
 | 메서드 | 경로 | 설명 |
