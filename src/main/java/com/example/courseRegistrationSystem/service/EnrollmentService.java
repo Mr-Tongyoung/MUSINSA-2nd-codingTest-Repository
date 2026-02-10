@@ -100,12 +100,23 @@ public class EnrollmentService {
     }
 
     @Transactional(readOnly = true)
+    public TimetableResponse getTimetableByStudentNumber(String studentNumber) {
+        Student student = studentRepository.findByStudentNumber(studentNumber)
+                .orElseThrow(() -> new BusinessException(
+                        HttpStatus.NOT_FOUND, "STUDENT_NOT_FOUND", "해당 학번의 학생을 찾을 수 없습니다"));
+        return buildTimetable(student);
+    }
+
+    @Transactional(readOnly = true)
     public TimetableResponse getTimetable(Long studentId) {
         Student student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new BusinessException(
                         HttpStatus.NOT_FOUND, "STUDENT_NOT_FOUND", "해당 학생을 찾을 수 없습니다"));
+        return buildTimetable(student);
+    }
 
-        List<Enrollment> enrollments = enrollmentRepository.findByStudentId(studentId);
+    private TimetableResponse buildTimetable(Student student) {
+        List<Enrollment> enrollments = enrollmentRepository.findByStudentId(student.getId());
 
         List<TimetableResponse.TimetableCourse> courses = enrollments.stream()
                 .map(e -> TimetableResponse.TimetableCourse.builder()

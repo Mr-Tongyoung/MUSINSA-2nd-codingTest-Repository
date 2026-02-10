@@ -36,4 +36,10 @@ public class EnrollmentController implements EnrollmentControllerDocs {
     public ResponseEntity<TimetableResponse> getTimetable(@PathVariable Long studentId) {
         return ResponseEntity.ok(enrollmentService.getTimetable(studentId));
     }
+
+    @GetMapping("/timetable")
+    public ResponseEntity<TimetableResponse> getTimetableByStudentNumber(
+            @RequestParam String studentNumber) {
+        return ResponseEntity.ok(enrollmentService.getTimetableByStudentNumber(studentNumber));
+    }
 }

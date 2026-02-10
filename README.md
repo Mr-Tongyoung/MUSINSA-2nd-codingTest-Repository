@@ -76,7 +76,8 @@ http://localhost:8080/swagger-ui/index.html
 | GET | `/professors` | 교수 목록 조회 |
 | POST | `/enrollments` | 수강신청 |
 | DELETE | `/enrollments/{id}` | 수강취소 |
-| GET | `/students/{id}/timetable` | 내 시간표 조회 |
+| GET | `/students/{id}/timetable` | 내 시간표 조회 (학생 ID) |
+| GET | `/timetable?studentNumber={학번}` | 내 시간표 조회 (학번) |
 
 > 상세 API 명세는 [docs/API.md](docs/API.md) 참고
 

@@ -38,11 +38,19 @@ public interface EnrollmentControllerDocs {
     })
     ResponseEntity<Map<String, String>> cancel(@Parameter(description = "수강신청 ID") Long enrollmentId);
 
-    @Operation(summary = "내 시간표 조회", description = "해당 학생의 이번 학기 시간표를 조회합니다.")
+    @Operation(summary = "내 시간표 조회 (학생 ID)", description = "학생 ID로 이번 학기 시간표를 조회합니다.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "조회 성공"),
             @ApiResponse(responseCode = "404", description = "학생을 찾을 수 없음",
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
     ResponseEntity<TimetableResponse> getTimetable(@Parameter(description = "학생 ID") Long studentId);
+
+    @Operation(summary = "내 시간표 조회 (학번)", description = "학번으로 이번 학기 시간표를 조회합니다.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "조회 성공"),
+            @ApiResponse(responseCode = "404", description = "해당 학번의 학생을 찾을 수 없음",
+                    content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+    })
+    ResponseEntity<TimetableResponse> getTimetableByStudentNumber(@Parameter(description = "학번 (예: 202300001)") String studentNumber);
 }

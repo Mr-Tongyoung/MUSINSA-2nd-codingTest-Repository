@@ -224,3 +224,43 @@ GET /students/{studentId}/timetable
 |------|------|-----------|--------|
 | 파라미터 타입 불일치 | 400 | INVALID_PARAMETER | 'studentId' 파라미터의 값이 올바르지 않습니다 |
 | 학생 없음 | 404 | STUDENT_NOT_FOUND | 해당 학생을 찾을 수 없습니다 |
+
+---
+
+### 8. 내 시간표 조회 (학번)
+
+```
+GET /timetable?studentNumber={studentNumber}
+```
+
+**쿼리 파라미터**:
+| 파라미터 | 타입 | 필수 | 설명 |
+|----------|------|------|------|
+| studentNumber | String | Y | 학번 (예: 202300001) |
+
+**응답 예시**:
+```json
+{
+  "studentId": 1,
+  "studentName": "김민준",
+  "semester": "2026-1",
+  "totalCredits": 15,
+  "courses": [
+    {
+      "enrollmentId": 1,
+      "courseId": 1,
+      "courseName": "자료구조",
+      "professorName": "이영희",
+      "credits": 3,
+      "schedule": "월 09:00-10:30"
+    }
+  ]
+}
+```
+
+**에러 케이스**:
+
+| 상황 | 코드 | 에러 코드 | 메시지 |
+|------|------|-----------|--------|
+| 학번 누락 | 400 | INVALID_PARAMETER | 'studentNumber' 파라미터가 필요합니다 |
+| 학생 없음 | 404 | STUDENT_NOT_FOUND | 해당 학번의 학생을 찾을 수 없습니다 |
