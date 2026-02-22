@@ -10,6 +10,8 @@ import com.example.courseRegistrationSystem.repository.CourseRepository;
 import com.example.courseRegistrationSystem.repository.EnrollmentRepository;
 import com.example.courseRegistrationSystem.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +27,7 @@ public class EnrollmentService {
     private final EnrollmentRepository enrollmentRepository;
     private final StudentRepository studentRepository;
     private final CourseRepository courseRepository;
+    private final CacheManager cacheManager;
 
     @Transactional
     public EnrollmentResponse enroll(Long studentId, Long courseId) {
@@ -81,6 +84,8 @@ public class EnrollmentService {
                 .build();
         enrollmentRepository.save(enrollment);
 
+        evictCourseCaches(course);
+
         return EnrollmentResponse.from(enrollment);
     }
 
@@ -97,6 +102,8 @@ public class EnrollmentService {
 
         course.decreaseEnrolled();
         enrollmentRepository.delete(enrollment);
+
+        evictCourseCaches(course);
     }
 
     @Transactional(readOnly = true)
@@ -173,5 +180,16 @@ public class EnrollmentService {
     private int toMinutes(String time) {
         String[] parts = time.split(":");
         return Integer.parseInt(parts[0]) * 60 + Integer.parseInt(parts[1]);
+    }
+
+    private void evictCourseCaches(Course course) {
+        Cache coursesCache = cacheManager.getCache("courses");
+        if (coursesCache != null) {
+            coursesCache.clear();
+        }
+        Cache deptCache = cacheManager.getCache("coursesByDepartment");
+        if (deptCache != null) {
+            deptCache.evict(course.getDepartment().getId());
+        }
     }
 }

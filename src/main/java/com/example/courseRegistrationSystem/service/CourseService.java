@@ -5,6 +5,7 @@ import com.example.courseRegistrationSystem.exception.BusinessException;
 import com.example.courseRegistrationSystem.repository.CourseRepository;
 import com.example.courseRegistrationSystem.repository.DepartmentRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,12 +20,14 @@ public class CourseService {
     private final CourseRepository courseRepository;
     private final DepartmentRepository departmentRepository;
 
+    @Cacheable("courses")
     public List<CourseResponse> findAll() {
         return courseRepository.findAll().stream()
                 .map(CourseResponse::from)
                 .toList();
     }
 
+    @Cacheable(value = "coursesByDepartment", key = "#departmentId")
     public List<CourseResponse> findByDepartmentId(Long departmentId) {
         if (!departmentRepository.existsById(departmentId)) {
             throw new BusinessException(
